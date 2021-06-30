@@ -22,7 +22,7 @@ $ip_user = get_client_ip();
 $activity="Akses Menu Monitor";
 date_default_timezone_set("Asia/Jakarta"); 
 $date = date('Y-m-d h:i:s A');
-$query = mysqli_query($connect,"INSERT INTO log VALUES (NULL,'$ip_user','$activity','$date')");
+$query = mysqli_query($connect,"INSERT INTO log VALUES ('$ip_user','$activity','$date')");
 ?>
 <!DOCTYPE html>
 <html lang="en">
