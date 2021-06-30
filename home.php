@@ -6,11 +6,29 @@ if (!isset($_SESSION['id_pembeli'])){
 }
 
 include 'koneksi.php';
-$ip_user=$_SERVER['REMOTE_ADDR'];
+function get_client_ip() {
+  $ipaddress = '';
+  if (isset($_SERVER['HTTP_CLIENT_IP']))
+      $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+  else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+      $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+  else if(isset($_SERVER['HTTP_X_FORWARDED']))
+      $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+  else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+      $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+  else if(isset($_SERVER['HTTP_FORWARDED']))
+      $ipaddress = $_SERVER['HTTP_FORWARDED'];
+  else if(isset($_SERVER['REMOTE_ADDR']))
+      $ipaddress = $_SERVER['REMOTE_ADDR'];
+  else
+      $ipaddress = 'UNKNOWN';
+  return $ipaddress;
+}
+$ip_user = get_client_ip();
 $activity="Akses Menu Home";
 date_default_timezone_set("Asia/Jakarta"); 
 $date = date('Y-m-d h:i:s A');
-$log=mysqli_query($connect,"insert into log(ip_user,activity,date) values ('$ip_user','$activity','$date')");
+$query = mysqli_query($connect,"INSERT INTO log VALUES (NULL,'$ip_user','$activity','$date')");
 ?>
 <!DOCTYPE html>
 <html lang="en">
