@@ -4,7 +4,7 @@ $ip_user=$_SERVER['REMOTE_ADDR'];
 $activity="Akses Menu Mouse";
 date_default_timezone_set("Asia/Jakarta"); 
 $date = date('Y-m-d h:i:s A');
-$log=mysqli_query($connect,"insert into log(ip_user,activity,date) values (NULL,'$ip_user','$activity','$date')");
+$log=mysqli_query($connect,"insert into log(ip_user,activity,date) values ('$ip_user','$activity','$date')");
 ?>
 <!DOCTYPE html>
 <html lang="en">
